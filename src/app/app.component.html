@@ -21,7 +21,7 @@
     </div>
 
     <div class="ui-g-12">
-      <p-dataTable [value]="lancamentos">
+      <p-dataTable [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true">
         <p-column field="pessoa" header="Pessoa"></p-column>
         <p-column field="descricao" header="Descrição"></p-column>
         <p-column field="dataVencimento" header="Vencimento" styleClass="col-data"></p-column>
@@ -33,8 +33,8 @@
         </p-column>
         <p-column styleClass="col-acoes">
           <ng-template pTemplate="body">
-            <a pButton icon="fa-pencil"></a>
-            <button pButton icon="fa-trash"></button>
+            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
           </ng-template>
         </p-column>
       </p-dataTable>
