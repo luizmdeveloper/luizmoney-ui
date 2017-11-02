@@ -1,52 +1,60 @@
 <div class="container">
-    <form>
-      <div class="ui-g">
-        <div class="ui-g-12">
-          <h1>Novo lançamento</h1>
-        </div>
-        <div class="ui-g-12">
-          <p-selectButton [options]="tipos" #tipo></p-selectButton>
-        </div>
-        <div class="ui-g-6  ui-md-3  ui-fluid">
-          <label class="label  labe-input">Vencimento</label>
-          <p-calendar dateFormat="dd/mm/yy"></p-calendar>
-        </div>
-
-        <div class="ui-g-6  ui-md-3  ui-fluid">
-          <label class="label  labe-input">{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
-          <p-calendar dateFormat="dd/mm/yy"></p-calendar>
-        </div>
-
-        <div class="ui-g-12  ui-md-9  ui-fluid">
-          <label class="label  label-input">Descrição</label>
-          <input pInputText type="text">
-        </div>
-
-        <div class="ui-g-12  ui-md-3  ui-fluid">
-          <label class="label  label-input">Valor</label>
-          <input pInputText type="text" placeholder="0,00" currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative : false }">
-        </div>
-
-        <div class="ui-g-12  ui-md-6  ui-fluid">
-          <label class="label  label-input">Categoria</label>
-          <p-dropdown [options]="categorias" [autoWidth]="false" placeholder="Selecione"></p-dropdown>
-        </div>
-
-        <div class="ui-g-12  ui-md-6 ui-fluid">
-          <label class="label  label-input">Pessoa</label>
-          <p-dropdown [options]="pessoas" [autoWidth]="false" [filter]="true" placeholder="Selecione"></p-dropdown>
-        </div>
-
-        <div class="ui-g-12  ui-fluid">
-          <label class="label  label-input">Observação</label>
-          <textarea pInputTextarea rows="3"></textarea>
-        </div>
-
-        <div class="ui-g-12">
-          <button pButton type="submit" label="Salvar"></button>
-          <button pButton type="button" label="Novo" class="ui-button-info"></button>
-          <a href="javascript:;">Voltar para a pesquisa</a>
-        </div>
+  <form #f="ngForm">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Novo lançamento</h1>
       </div>
+      <div class="ui-g-12">
+        <p-selectButton [options]="tipos" #tipo></p-selectButton>
+      </div>
+
+      <div class="ui-g-6  ui-md-3  ui-fluid">
+        <label class="label  labe-input">Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" name="vencimento" ngModel #vencimento="ngModel" required></p-calendar>
+
+        <app-message [control]="vencimento" error="required" message="Informe o vencimento"></app-message>
+      </div>
+
+      <div class="ui-g-6  ui-md-3  ui-fluid">
+        <label class="label  labe-input">{{tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+        <p-calendar dateFormat="dd/mm/yy"></p-calendar>
+      </div>
+
+      <div class="ui-g-12  ui-md-9  ui-fluid">
+        <label class="label  label-input">Descrição</label>
+        <input pInputText type="text" name="descricao" ngModel #descricao="ngModel" required minlength="5">
+
+        <app-message [control]="descricao" error="required" message="Informe uma descrição"></app-message>
+        <app-message [control]="descricao" error="minlength" message="Descrição deve conter {{descricao.errors?.minlength?.requiredLength}} caracters"></app-message>
+      </div>
+
+      <div class="ui-g-12  ui-md-3  ui-fluid">
+        <label class="label  label-input">Valor</label>
+        <input pInputText type="text" placeholder="0,00" currencyMask ngModel name="valor" #valor="ngModel" required
+                [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative : false }">
+        <app-message [control]="valor" error="required" message="Informe o valor"></app-message>
+      </div>
+
+      <div class="ui-g-12  ui-md-6  ui-fluid">
+        <label class="label  label-input">Categoria</label>
+        <p-dropdown [options]="categorias" [autoWidth]="false" placeholder="Selecione" required></p-dropdown>
+      </div>
+
+      <div class="ui-g-12  ui-md-6 ui-fluid">
+        <label class="label  label-input">Pessoa</label>
+        <p-dropdown [options]="pessoas" [autoWidth]="false" [filter]="true" placeholder="Selecione" required></p-dropdown>
+      </div>
+
+      <div class="ui-g-12  ui-fluid">
+        <label class="label  label-input">Observação</label>
+        <textarea pInputTextarea rows="3"></textarea>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Novo" class="ui-button-info"></button>
+        <a href="javascript:;">Voltar para a pesquisa</a>
+      </div>
+    </div>
   </form>
 </div>

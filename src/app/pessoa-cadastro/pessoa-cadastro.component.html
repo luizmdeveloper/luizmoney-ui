@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form #f="ngForm">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Nova pessoa</h1>
@@ -7,17 +7,24 @@
 
       <div class="ui-g-12  ui-fluid">
         <label class="label  label-input">Nome</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="nome" ngModel #nome="ngModel" required minlength="5">
+
+        <app-message [control]="nome" error="required" message="Informe o nome"></app-message>
+        <app-message [control]="nome" error="minlength" message="Nome deve conter {{nome.errors?.minlength?.requiredLength}} caracters"></app-message>
       </div>
 
       <div class="ui-g-12  ui-md-8  ui-fluid">
         <label class="label  label-input">Logradouro</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="logradouro" ngModel #logradouro="ngModel" required>
+
+        <app-message [control]="logradouro" error="required" message="Informe o logradouro"></app-message>
       </div>
 
       <div class="ui-g-12  ui-md-4  ui-fluid">
         <label class="label  label-input">Número</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="numero" ngModel #numero="ngModel" required>
+
+        <app-message [control]="numero" error="required" message="Informe o número"></app-message>
       </div>
 
       <div class="ui-g-12  ui-md-4  ui-fluid">
@@ -27,26 +34,34 @@
 
       <div class="ui-g-12  ui-md-4  ui-fluid">
         <label class="label  label-input">Bairro</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="bairro" ngModel #bairro="ngModel" required>
+
+        <app-message [control]="bairro" error="required" message="Informe o bairro"></app-message>
       </div>
 
       <div class="ui-g-12  ui-md-4  ui-fluid">
         <label class="label  label-input">CEP</label>
-        <p-inputMask mask="99.999-999" type="text"></p-inputMask>
+        <p-inputMask mask="99.999-999" name="cep" type="text" ngModel #cep="ngModel" required></p-inputMask>
+
+        <app-message [control]="cep" error="required" message="Informe o cep"></app-message>
       </div>
 
       <div class="ui-g-12  ui-md-6  ui-fluid">
         <label class="label  label-input">Cidade</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="cidade" ngModel #cidade="ngModel" required>
+
+        <app-message [control]="cidade" error="required" message="Informe a cidade"></app-message>
       </div>
 
       <div class="ui-g-12  ui-md-6  ui-fluid">
         <label class="label  label-input">Estado</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="estado" ngModel #estado="ngModel" required>
+
+        <app-message [control]="estado" error="required" message="Informe o estado"></app-message>
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
         <button pButton type="button" label="Novo" class="ui-button-info"></button>
         <a href="javascript:;">Voltar para a pesquisa</a>
       </div>

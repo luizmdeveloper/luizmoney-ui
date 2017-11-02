@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { MessageComponent } from './message/message.component';
+import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +31,15 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     NavbarComponent,
     PessoaPesquisaComponent,
     LancamentoCadastroComponent,
-    PessoaCadastroComponent
+    PessoaCadastroComponent,
+    MessageComponent,
+    LancamentoGridComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
-    CurrencyMaskModule,
+
     InputTextModule,
     ButtonModule,
     DataTableModule,
@@ -42,7 +48,9 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-    InputMaskModule
+    InputMaskModule,
+
+    CurrencyMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
