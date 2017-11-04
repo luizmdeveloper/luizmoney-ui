@@ -12,6 +12,8 @@ import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.compo
 import { PessoaGridComponent } from './pessoa-grid/pessoa-grid.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
+import { SharedModule } from './../shared/shared.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +23,9 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     InputTextModule,
     DataTableModule,
     InputMaskModule,
-    TooltipModule
+    TooltipModule,
+
+    SharedModule
   ],
   declarations: [
     PessoaCadastroComponent,
