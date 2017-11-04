@@ -12,7 +12,7 @@
         <label class="label  labe-input">Vencimento</label>
         <p-calendar dateFormat="dd/mm/yy" name="vencimento" ngModel #vencimento="ngModel" required></p-calendar>
 
-        <app-message [control]="vencimento" error="required" message="Informe o vencimento"></app-message>
+        <!-- <app-message [control]="vencimento" error="required" message="Informe o vencimento"></app-message> -->
       </div>
 
       <div class="ui-g-6  ui-md-3  ui-fluid">
@@ -24,15 +24,16 @@
         <label class="label  label-input">Descrição</label>
         <input pInputText type="text" name="descricao" ngModel #descricao="ngModel" required minlength="5">
 
-        <app-message [control]="descricao" error="required" message="Informe uma descrição"></app-message>
-        <app-message [control]="descricao" error="minlength" message="Descrição deve conter {{descricao.errors?.minlength?.requiredLength}} caracters"></app-message>
+        <!-- <app-message [control]="descricao" error="required" message="Informe uma descrição"></app-message>
+        <app-message [control]="descricao" error="minlength" message="Descrição deve conter {{descricao.errors?.minlength?.requiredLength}} caracters"></app-message> -->
       </div>
 
       <div class="ui-g-12  ui-md-3  ui-fluid">
         <label class="label  label-input">Valor</label>
         <input pInputText type="text" placeholder="0,00" currencyMask ngModel name="valor" #valor="ngModel" required
                 [options]="{ prefix: '', thousands: '.', decimal: ',', allowNegative : false }">
-        <app-message [control]="valor" error="required" message="Informe o valor"></app-message>
+
+        <!-- <app-message [control]="valor" error="required" message="Informe o valor"></app-message> -->
       </div>
 
       <div class="ui-g-12  ui-md-6  ui-fluid">

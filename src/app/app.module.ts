@@ -16,29 +16,24 @@ import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import { AppComponent } from './app.component';
-import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
-import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
-import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { MessageComponent } from './message/message.component';
-import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
+import { PessoasModule } from './pessoas/pessoas.module';
+import { LancamentosModule } from './lancamentos/lancamentos.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LancamentoPesquisaComponent,
     NavbarComponent,
-    PessoaPesquisaComponent,
-    LancamentoCadastroComponent,
-    PessoaCadastroComponent,
-    MessageComponent,
-    LancamentoGridComponent
+    MessageComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+
+    LancamentosModule,
+    PessoasModule,
 
     InputTextModule,
     ButtonModule,

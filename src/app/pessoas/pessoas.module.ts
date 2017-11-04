@@ -1,0 +1,36 @@
+import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+import { DataTableModule } from 'primeng/components/datatable/datatable';
+import { ButtonModule } from 'primeng/components/button/button';
+import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
+import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+
+import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
+import { PessoaGridComponent } from './pessoa-grid/pessoa-grid.component';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+
+    ButtonModule,
+    InputTextModule,
+    DataTableModule,
+    InputMaskModule,
+    TooltipModule
+  ],
+  declarations: [
+    PessoaCadastroComponent,
+    PessoaGridComponent,
+    PessoaPesquisaComponent
+  ],
+  exports: [
+    PessoaCadastroComponent,
+    PessoaPesquisaComponent
+  ]
+})
+export class PessoasModule { }
