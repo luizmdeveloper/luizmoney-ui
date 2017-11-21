@@ -1,6 +1,6 @@
 <p-dataTable [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true">
   <p-column field="pessoa" header="Pessoa"></p-column>
-  <p-column field="descricao" header="Descrição"></p-column>
+  <p-column field="categoria" header="Descrição"></p-column>
   <p-column header="Vencimento" styleClass="col-data">
     <ng-template let-lanc="rowData" pTemplate="body">
       <span>{{lanc.dataVencimento | date:'dd/MM/y'}}</span>
