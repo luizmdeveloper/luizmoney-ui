@@ -14,7 +14,6 @@ import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
-import { LancamentoGridComponent } from './lancamento-grid/lancamento-grid.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 
 import { SharedModule } from './../shared/shared.module';
@@ -39,7 +38,6 @@ import { SharedModule } from './../shared/shared.module';
   ],
   declarations: [
     LancamentoCadastroComponent,
-    LancamentoGridComponent,
     LancamentoPesquisaComponent
   ],
   exports: [

@@ -1,28 +1,34 @@
 <div class="container">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <h1>Lançamentos</h1>
-    </div>
+  <form autocomplete="false" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
 
-    <div class="ui-g-12 ui-fluid">
-      <label class="label  label-input">Descrição</label>
-      <input pInputText type="text">
-    </div>
+      <div class="ui-g-12">
+        <h1>Lançamentos</h1>
+      </div>
 
-    <div class="ui-g-12">
-      <label class="label  label-input">Vencimento</label>
-      <input pInputText type="text">
-      <label class="label">até</label>
-      <input pInputText type="text">
-    </div>
+      <div class="ui-g-12 ui-fluid">
+        <label class="label  label-input">Descrição</label>
+        <input pInputText type="text" name="descricao" [(ngModel)]="descricao">
+      </div>
 
-    <div class="ui-g-12">
+      <div class="ui-g-12">
+        <label class="label  label-input">Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width : '95px'}" name="dataVemcimentoInicial"
+            [(ngModel)]="dataVencimentoInicial"></p-calendar>
+        <label class="label">até</label>
+        <p-calendar dateFormat="dd/mm/yy" [inputStyle]="{ width : '95px'}" name="dataVemcimentoFinal"
+            [(ngModel)]="dataVencimentoFinal"></p-calendar>
+      </div>
+
+      <div class="ui-g-12">
         <button pButton type="submit" label="Pesquisar"></button>
+      </div>
     </div>
+  </form>
 
+  <div clas="ui-g">
     <div class="ui-g-12">
-      <app-lancamento-grid [lancamentos]="lancamentos"></app-lancamento-grid>
-      <!-- <p-dataTable [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true">
+      <p-dataTable [value]="lancamentos" [paginator]="true" [rows]="5" [responsive]="true" emptyMessage="Nenhum lançamento encontrado">
         <p-column field="pessoa" header="Pessoa"></p-column>
         <p-column field="descricao" header="Descrição"></p-column>
         <p-column header="Vencimento" styleClass="col-data">
@@ -43,12 +49,11 @@
         <p-column styleClass="col-acoes">
           <ng-template pTemplate="body">
             <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-            <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
+              <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"></button>
           </ng-template>
         </p-column>
-      </p-dataTable> -->
+      </p-dataTable>
     </div>
-
     <div class="ui-g-12">
         <a pButton label="Novo lançamento"></a>
     </div>
