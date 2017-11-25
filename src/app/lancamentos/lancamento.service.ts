@@ -15,7 +15,7 @@ export class LancamentoFiltro {
 @Injectable()
 export class LancamentoService {
 
-  apiUrl = 'http://localhost:8080/lancamentos';
+  apiUrl = 'http://localhost:8080/lancamentossss';
 
   constructor(private http: Http) { }
 
