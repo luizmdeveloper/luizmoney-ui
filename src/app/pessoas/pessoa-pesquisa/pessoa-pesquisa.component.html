@@ -1,5 +1,6 @@
 <div class="container">
 
+  <form autocomplete="false" (ngSubmit)="pesquisar()">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Pessoas</h1>
@@ -7,23 +8,45 @@
 
       <div class="ui-g-12 ui-fluid">
         <label class="label  label-input">Nome</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
       </div>
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Pesquisar"></button>
       </div>
     </div>
+  </form>
 
-    <div class="ui-g">
-      <div clas="ui-g-12">
-        <app-pessoa-grid [pessoas]="pessoas"></app-pessoa-grid>
-      </div>
+  <div class="ui-g">
+    <div clas="ui-g-12">
+      <p-dataTable [value]="pessoas" [responsive]="true"
+        emptyMessage="Nenhuma pessoa encontrada"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [totalRecords]="totalRegistro" [lazy]="true"
+        (onLazyLoad)="paginar($event)">
+        <p-column field="nome" header="Nome"></p-column>
+        <p-column field="endereco.cidade" header="Cidade"></p-column>
+        <p-column field="endereco.uf" header="UF" styleClass="col-uf"></p-column>
+        <p-column header="Status" styleClass="col-status">
+          <ng-template let-pes="rowData" pTemplate="body">
+            <a href="#" [pTooltip]="pes.ativo ? 'Desativar' : 'Ativar'" tooltipPosition="top">
+              {{pes.ativo ? 'Ativo': 'Inativo'}}
+            </a>
+          </ng-template>
+        </p-column>
+        <p-column styleClass="col-acoes">
+          <ng-template pTemplate="body">
+            <a pButton href="#" icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+            <button pButton icon="fa fa-trash" pTooltip="Incluir" tooltipPosition="top"></button>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
     </div>
+  </div>
 
-    <div class="ui-g">
-      <div class="ui-g-12">
-        <button pButton label="nova pessoa"></button>
-      </div>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <button pButton label="nova pessoa"></button>
     </div>
+  </div>
 </div>

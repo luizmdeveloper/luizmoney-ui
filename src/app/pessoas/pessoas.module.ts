@@ -9,7 +9,6 @@ import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
-import { PessoaGridComponent } from './pessoa-grid/pessoa-grid.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
 import { SharedModule } from './../shared/shared.module';
@@ -29,7 +28,6 @@ import { SharedModule } from './../shared/shared.module';
   ],
   declarations: [
     PessoaCadastroComponent,
-    PessoaGridComponent,
     PessoaPesquisaComponent
   ],
   exports: [
