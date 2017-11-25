@@ -9,8 +9,12 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { CoreModule } from './core/core.module';
 
+import { ToastyModule } from 'ng2-toasty';
+import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+
 import { LancamentoService } from './lancamentos/lancamento.service';
 import { PessoaService } from './pessoas/pessoa.service';
+import { ConfirmationService } from 'primeng/components/common/api';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,17 @@ import { PessoaService } from './pessoas/pessoa.service';
     BrowserAnimationsModule,
     HttpModule,
 
+    ToastyModule.forRoot(),
+    ConfirmDialogModule,
+
     LancamentosModule,
     PessoasModule,
     CoreModule
   ],
   providers: [
     LancamentoService,
-    PessoaService
+    PessoaService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,9 +1,10 @@
-import { LancamentoFiltro } from './../lancamento.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { LazyLoadEvent } from 'primeng/components/common/api';
+import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/api';
+import { ToastyService } from 'ng2-toasty';
 
 import { LancamentoService } from '../lancamento.service';
+import { LancamentoFiltro } from './../lancamento.service';
 
 @Component({
   selector: 'app-lancamento-pesquisa',
@@ -15,8 +16,13 @@ export class LancamentoPesquisaComponent implements OnInit {
   totalRegistro = 0;
   filtro = new LancamentoFiltro();
   lancamentos = [];
+  @ViewChild('tabela') gird;
 
-  constructor(private lancamentoService: LancamentoService) {}
+  constructor(
+    private lancamentoService: LancamentoService,
+    private toasty: ToastyService,
+    private confirm: ConfirmationService
+  ) {}
 
   ngOnInit() {}
 
@@ -32,6 +38,24 @@ export class LancamentoPesquisaComponent implements OnInit {
   paginar(event: LazyLoadEvent) {
     const pagina = event.first / event.rows;
     this.pesquisar(pagina);
+  }
+
+  confirmacaoExcluir(lancamento) {
+    this.confirm.confirm({
+      message: 'Deseja realmente excluir o lançamento ?',
+      accept: () => this.excluir(lancamento)
+    });
+  }
+
+  excluir(lancamento: any) {
+    this.lancamentoService.excluir(lancamento.codigo).then(() => {
+      if (this.gird.first === 0) {
+        this.pesquisar();
+      }else {
+        this.gird.first = 0;
+      }
+      this.toasty.success('Lancçamento excluído com sucesso !');
+    });
   }
 
 }
