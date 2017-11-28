@@ -30,6 +30,7 @@ export class PessoaPesquisaComponent implements OnInit  {
   ngOnInit() {}
 
   pesquisar(pagina = 0) {
+    this.filtro.pagina = pagina;
     this.pessoaService.pesquisar(this.filtro)
     .then(resultado => {
         this.pessoas = resultado.pessoas;
@@ -52,14 +53,22 @@ export class PessoaPesquisaComponent implements OnInit  {
 
   excluir(pessoa: any) {
     this.pessoaService.excluir(pessoa.codigo).then(() => {
-      if (this.grid.first === 0) {
-        this.pesquisar();
-      }else {
-        this.grid.first = 0;
-      }
+      this.atualizarGrid();
       this.toasty.success('Pessoa excluída com sucesso!');
     })
     .catch(error => this.errorHandeler.handeler(error));
+  }
+
+  alterarStatus(pessoa: any) {
+    this.pessoaService.atualizarStatus(pessoa).then(() => this.atualizarGrid());
+  }
+
+  atualizarGrid() {
+    if (this.grid.first === 0) {
+      this.pesquisar();
+    }else {
+      this.grid.first = 0;
+    }
   }
 
 }
