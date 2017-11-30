@@ -48,6 +48,15 @@ export class CategoriaService {
       .catch(error => this.erroHandeler.handeler(error));
   }
 
+  buscar(): Promise<any> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
+
+    return this.http.get(`${this.apiUrl}`, { headers })
+      .toPromise()
+      .then(response => response.json().content);
+  }
+
   excluir(codigo: any): Promise<void> {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
