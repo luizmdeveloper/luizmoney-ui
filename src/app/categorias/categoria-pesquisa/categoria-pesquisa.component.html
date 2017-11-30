@@ -1,0 +1,42 @@
+<div class="container">
+  <form autocomplete="false" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Categorias</h1>
+      </div>
+
+      <div class="ui-g-12  ui-fluid">
+        <label class="label  label-input">Nome</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Pesquisar"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-dataTable [value]="categorias" [responsive]="true"
+        emptyMessage="Nenhuma categoria"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistro"
+        (onLazyLoad)="paginar($event)" #tabela>
+          <p-column field="nome" header="Nome"></p-column>
+          <p-column styleClass="col-acoes">
+            <ng-template let-cat="rowData" pTemplate="body">
+              <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+              <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
+                    (click)="confirmacaoExcluir(cat)"></button>
+            </ng-template>
+          </p-column>
+      </p-dataTable>
+    </div>
+  </div>
+  <div class="ui-g">
+    <div class="ui-g-12">
+        <button pButton type="submit" label="Nova categoria"></button>
+    </div>
+  </div>
+</div>

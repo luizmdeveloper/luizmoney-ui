@@ -39,7 +39,6 @@ export class LancamentoService {
       params.set('dataVencimentoAte', moment(filtro.dataVencimentoFinal).format('YYYY-MM-DD'));
     }
 
-
     return this.http.get(`${this.apiUrl}?resumo`, { headers, search: params })
           .toPromise()
           .then(
