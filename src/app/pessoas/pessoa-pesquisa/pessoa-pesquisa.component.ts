@@ -36,7 +36,7 @@ export class PessoaPesquisaComponent implements OnInit  {
         this.pessoas = resultado.pessoas;
         this.totalRegistro = resultado.total;
       })
-      .catch(error => this.errorHandeler.handeler(error));
+      .catch(error => this.errorHandeler.handele(error));
   }
 
   paginar(event: LazyLoadEvent) {
@@ -56,7 +56,7 @@ export class PessoaPesquisaComponent implements OnInit  {
       this.atualizarGrid();
       this.toasty.success('Pessoa excluída com sucesso!');
     })
-    .catch(error => this.errorHandeler.handeler(error));
+    .catch(error => this.errorHandeler.handele(error));
   }
 
   alterarStatus(pessoa: any) {

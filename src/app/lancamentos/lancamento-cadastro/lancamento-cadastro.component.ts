@@ -1,7 +1,13 @@
-import { PessoaService } from './../../pessoas/pessoa.service';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
 import { CategoriaService } from './../../categorias/categoria.service';
 import { ErrorHandelerService } from './../../core/error-handeler.service';
-import { Component, OnInit } from '@angular/core';
+import { LancamentoService } from '../lancamento.service';
+import { PessoaService } from './../../pessoas/pessoa.service';
+import { ToastyService } from 'ng2-toasty';
+
+import { Lancamento } from './../../core/model';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -16,12 +22,14 @@ export class LancamentoCadastroComponent implements OnInit  {
   ];
 
   categorias = [];
-
   pessoas = [];
+  lancamento = new Lancamento();
 
   constructor(
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
+    private lancamentoService: LancamentoService,
+    private toasty: ToastyService,
     private erroHandeler: ErrorHandelerService
   ) { }
 
@@ -35,7 +43,7 @@ export class LancamentoCadastroComponent implements OnInit  {
       .then(response => {
         this.categorias = response.map(chave => ({ label: chave.nome, value: chave.codigo }));
       })
-      .catch(error => this.erroHandeler.handeler(error));
+      .catch(error => this.erroHandeler.handele(error));
   }
 
   carregarPessoas() {
@@ -43,7 +51,16 @@ export class LancamentoCadastroComponent implements OnInit  {
       .then(response => {
         this.pessoas = response.map(chave => ({label: chave.nome, value: chave.codigo}));
       })
-      .catch(error => this.erroHandeler.handeler(error));
+      .catch(error => this.erroHandeler.handele(error));
+  }
+
+  salvar(form: FormControl) {
+    this.lancamentoService.cadastrar(this.lancamento).then(() => {
+      form.reset();
+      this.toasty.success('Lançamento salvo com sucesso!');
+      this.lancamento = new Lancamento();
+    })
+    .catch(erro => this.erroHandeler.handele(erro));
   }
 
 }

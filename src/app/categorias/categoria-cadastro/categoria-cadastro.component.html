@@ -1,14 +1,14 @@
 <div class="container">
-  <form autocomplete="false" #f="ngForm">
+  <form #f="ngForm" autocomplete="false" (ngSubmit)="salvar(f)">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Nova Categoria</h1>
       </div>
       <div class="ui-g-12  ui-fluid">
         <label class="label  label-input">Nome</label>
-        <input pInputText type="text" name="nome" ngModel #nome="ngModel" required>
+        <input pInputText type="text" name="nome" [(ngModel)]="categoria.nome" #nome="ngModel" required>
 
-        <!-- <app-message [control]="nome" error="required" message="Informe o nome"></app-message> -->
+        <app-message [control]="nome" error="required" message="Informe o nome"></app-message>
       </div>
 
       <div class="ui-g-12">

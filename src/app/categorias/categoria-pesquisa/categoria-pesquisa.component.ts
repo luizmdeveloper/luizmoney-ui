@@ -51,6 +51,6 @@ export class CategoriaPesquisaComponent {
       }
       this.toasty.success('Categoria excluída com sucesso!');
     })
-    .catch(erro => this.erroHandeler.handeler(erro));
+    .catch(erro => this.erroHandeler.handele(erro));
   }
 }

@@ -7,7 +7,7 @@ export class ErrorHandelerService {
 
   constructor(private toasty: ToastyService) { }
 
-  handeler(erro: any) {
+  handele(erro: any) {
     let msg: string;
 
     if (typeof erro === 'string') {

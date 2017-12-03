@@ -1,3 +1,4 @@
+import { Categoria } from './../core/model';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -45,7 +46,7 @@ export class CategoriaService {
           };
           return resultado;
       })
-      .catch(error => this.erroHandeler.handeler(error));
+      .catch(error => this.erroHandeler.handele(error));
   }
 
   buscar(): Promise<any> {
@@ -64,6 +65,16 @@ export class CategoriaService {
     return this.http.delete(`${this.apiUrl}/${codigo}`, { headers })
         .toPromise()
         .then(() => null);
+  }
+
+  cadastrar(categoria: Categoria): Promise<Categoria> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
+    headers.append('Contety-Type', 'application/json');
+
+    return this.http.post(`${this.apiUrl}`, JSON.stringify(categoria), { headers })
+            .toPromise()
+            .then(response => response.json());
   }
 
 }

@@ -4,6 +4,7 @@ import { Http, Headers, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandelerService } from '../core/error-handeler.service';
+import { Pessoa } from '../core/model';
 
 export class PessoaFiltro {
   nome: String;
@@ -74,7 +75,17 @@ export class PessoaService {
           .then(response => {
             this.toasty.success(!pessoa.ativo ? 'Pessoa ativada com sucessso' : 'Pessoa desativada com sucesso!');
           })
-          .catch(error => this.errorHandeler.handeler(error));
+          .catch(error => this.errorHandeler.handele(error));
+  }
+
+  cadastrar(pessoa: Pessoa): Promise<Pessoa> {
+    const headers = new Headers();
+    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post(`${this.urlPessoa}`, JSON.stringify(pessoa), {headers})
+          .toPromise()
+          .then(response => response.json());
   }
 
 }
