@@ -70,7 +70,7 @@ export class CategoriaService {
   cadastrar(categoria: Categoria): Promise<Categoria> {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
-    headers.append('Contety-Type', 'application/json');
+    headers.append('Content-Type', 'application/json');
 
     return this.http.post(`${this.apiUrl}`, JSON.stringify(categoria), { headers })
             .toPromise()
