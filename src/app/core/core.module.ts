@@ -10,10 +10,12 @@ import { ConfirmationService } from 'primeng/components/common/confirmationservi
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { ErrorHandelerService } from './error-handeler.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
 
     ToastyModule,
     ConfirmDialogModule,

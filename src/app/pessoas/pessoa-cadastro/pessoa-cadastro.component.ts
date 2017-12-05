@@ -1,5 +1,6 @@
-import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { ErrorHandelerService } from './../../core/error-handeler.service';
 import { PessoaService } from '../pessoa.service';
@@ -14,14 +15,19 @@ import { Pessoa } from './../../core/model';
 })
 export class PessoaCadastroComponent implements OnInit {
 
-
   pessoa = new Pessoa();
+  acao = 'Nova';
 
   constructor(private errorHandelerService: ErrorHandelerService,
               private pessoaService: PessoaService,
-              private toasty: ToastyService) { }
+              private toasty: ToastyService,
+              private routers: ActivatedRoute ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.routers.snapshot.params['codigo']) {
+      this.acao = 'Editar';
+    }
+  }
 
   salvar(form: FormControl) {
     this.pessoaService.cadastrar(this.pessoa).then(() => {

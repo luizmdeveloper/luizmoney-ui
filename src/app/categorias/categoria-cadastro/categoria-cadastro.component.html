@@ -2,7 +2,7 @@
   <form #f="ngForm" autocomplete="false" (ngSubmit)="salvar(f)">
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Nova Categoria</h1>
+        <h1>{{acao}} categoria</h1>
       </div>
       <div class="ui-g-12  ui-fluid">
         <label class="label  label-input">Nome</label>
@@ -14,7 +14,7 @@
       <div class="ui-g-12">
         <button pButton type="submit" label="salvar" [disabled]="f.invalid"></button>
         <button pButton type="" label="Novo" class="ui-button-info"></button>
-        <a href="javascript:;">Voltar para a pesquisa</a>
+        <a routerLink="/categorias">Voltar para a pesquisa</a>
       </div>
     </div>
   </form>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { CategoriaService } from './../../categorias/categoria.service';
 import { ErrorHandelerService } from './../../core/error-handeler.service';
@@ -24,16 +25,21 @@ export class LancamentoCadastroComponent implements OnInit  {
   categorias = [];
   pessoas = [];
   lancamento = new Lancamento();
+  acao = 'Novo';
 
   constructor(
     private categoriaService: CategoriaService,
     private pessoaService: PessoaService,
     private lancamentoService: LancamentoService,
     private toasty: ToastyService,
-    private erroHandeler: ErrorHandelerService
+    private erroHandeler: ErrorHandelerService,
+    private routers: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    if (this.routers.snapshot.params['codigo']) {
+      this.acao = 'Editar';
+    }
     this.carregarCategorias();
     this.carregarPessoas();
   }

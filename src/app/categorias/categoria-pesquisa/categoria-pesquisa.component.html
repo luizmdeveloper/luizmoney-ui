@@ -26,7 +26,7 @@
           <p-column field="nome" header="Nome"></p-column>
           <p-column styleClass="col-acoes">
             <ng-template let-cat="rowData" pTemplate="body">
-              <a pButton icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+              <a pButton [routerLink]="['/categorias', cat.codigo ]" icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
               <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
                     (click)="confirmacaoExcluir(cat)"></button>
             </ng-template>
@@ -36,7 +36,7 @@
   </div>
   <div class="ui-g">
     <div class="ui-g-12">
-        <button pButton type="submit" label="Nova categoria"></button>
+        <a routerLink="/categorias/nova" pButton type="submit" label="Nova categoria"></a>
     </div>
   </div>
 </div>

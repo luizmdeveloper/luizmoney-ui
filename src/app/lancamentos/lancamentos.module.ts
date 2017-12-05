@@ -1,6 +1,7 @@
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
 import { ButtonModule } from 'primeng/components/button/button';
@@ -22,6 +23,7 @@ import { SharedModule } from './../shared/shared.module';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
 
     InputTextModule,
     ButtonModule,

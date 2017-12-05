@@ -2,6 +2,7 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { DataTableModule } from 'primeng/components/datatable/datatable';
 import { ButtonModule } from 'primeng/components/button/button';
@@ -17,6 +18,7 @@ import { SharedModule } from './../shared/shared.module';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
 
     ButtonModule,
     InputTextModule,
