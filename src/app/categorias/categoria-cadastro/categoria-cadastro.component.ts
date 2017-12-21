@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { ErrorHandelerService } from './../../core/error-handeler.service';
 import { CategoriaService } from '../categoria.service';
@@ -17,7 +18,6 @@ export class CategoriaCadastroComponent implements OnInit {
 
   categoria = new Categoria();
   acao = 'Nova';
-  codigoCategoria = 0;
 
   constructor(private categoriaService: CategoriaService,
               private errorHandelerService: ErrorHandelerService,
@@ -25,36 +25,45 @@ export class CategoriaCadastroComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (this.route.snapshot.params['codigo']) {
-      this.codigoCategoria = this.route.snapshot.params['codigo'];
+    if (this.getEdicao()) {
+      this.categoria.codigo = this.route.snapshot.params['codigo'];
       this.acao = 'Editar';
-      this.carregarCategoria(this.codigoCategoria);
+      this.carregarCategoria(this.categoria);
     }
+  }
+
+  getEdicao(): boolean {
+    return this.route.snapshot.params['codigo'];
   }
 
   salvar(form: FormControl) {
-    if (this.codigoCategoria) {
-      this.categoriaService.atualizar(this.codigoCategoria, this.categoria)
-          .then(() => {
-            form.reset();
-            this.toasty.success('Categoria atualizada com sucesso!');
-            this.categoria = new Categoria();
-          })
-          .catch(erro => this.errorHandelerService.handele(erro));
+    if (this.categoria.codigo) {
+      this.atualizar();
     }else {
-      this.categoriaService.cadastrar(this.categoria).then(() => {
-        form.reset();
-        this.toasty.success('Categoria cadastrar com sucesso!');
-        this.categoria = new Categoria();
-      })
-      .catch(erro => this.errorHandelerService.handele(erro));
+      this.cadastrar(form);
     }
   }
 
-  carregarCategoria(codigo: any) {
-    this.categoriaService.buscarPorCodigo(codigo)
+  carregarCategoria(categoria: Categoria) {
+    this.categoriaService.buscarPorCodigo(categoria)
       .then(resultado => this.categoria = resultado)
       .catch(erro => this.errorHandelerService.handele(erro));
   }
 
+  atualizar() {
+    this.categoriaService.atualizar(this.categoria).then(categoria => {
+        this.categoria = categoria;
+        this.toasty.success('Categoria atualizada com sucesso!');
+      })
+      .catch(erro => this.errorHandelerService.handele(erro));
+  }
+
+  cadastrar(form: FormControl) {
+    this.categoriaService.cadastrar(this.categoria).then(() => {
+        form.reset();
+        this.toasty.success('Categoria cadastrar com sucesso!');
+        this.categoria = new Categoria();
+    })
+    .catch(erro => this.errorHandelerService.handele(erro));
+  }
 }

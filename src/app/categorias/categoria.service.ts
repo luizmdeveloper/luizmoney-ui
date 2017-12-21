@@ -86,14 +86,18 @@ export class CategoriaService {
           .then(response => response.json());
   }
 
-  atualizar(codigo: any, categoria: Categoria): Promise<Categoria> {
+  atualizar(categoria: Categoria): Promise<Categoria> {
     const headers = new Headers();
     headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
     headers.append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.apiUrl}/${codigo}`, JSON.stringify(categoria), { headers })
+    return this.http.put(`${this.apiUrl}/${categoria.codigo}`, JSON.stringify(categoria), { headers })
           .toPromise()
-          .then(response => response.json());
+          .then(response => {
+            const categoriaAlterada = response.json() as Categoria;
+
+            return categoriaAlterada;
+          });
 
   }
 
