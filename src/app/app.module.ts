@@ -1,4 +1,3 @@
-import { PessoaPesquisaComponent } from './pessoas/pessoa-pesquisa/pessoa-pesquisa.component';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,10 +17,12 @@ import { CategoriaPesquisaComponent } from './categorias/categoria-pesquisa/cate
 import { CategoriaCadastroComponent } from './categorias/categoria-cadastro/categoria-cadastro.component';
 import { LancamentoPesquisaComponent } from './lancamentos/lancamento-pesquisa/lancamento-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamentos/lancamento-cadastro/lancamento-cadastro.component';
+import { PessoaPesquisaComponent } from './pessoas/pessoa-pesquisa/pessoa-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoas/pessoa-cadastro/pessoa-cadastro.component';
+import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 
 const routes: Routes = [
-  { path: '', component: CategoriaPesquisaComponent },
+  { path: '', redirectTo: 'categorias', pathMatch: 'full' },
   { path: 'categorias', component: CategoriaPesquisaComponent },
   { path: 'categorias/nova', component: CategoriaCadastroComponent },
   { path: 'categorias/:codigo', component: CategoriaCadastroComponent },
@@ -30,7 +31,9 @@ const routes: Routes = [
   { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
   { path: 'pessoas', component: PessoaPesquisaComponent },
   { path: 'pessoas/nova', component: PessoaCadastroComponent },
-  { path: 'pessoas/:codigo', component: PessoaCadastroComponent }
+  { path: 'pessoas/:codigo', component: PessoaCadastroComponent },
+  { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
+  { path: '**', redirectTo: 'pagina-nao-encontrada'}
 ];
 
 @NgModule({

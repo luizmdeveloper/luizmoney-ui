@@ -83,7 +83,7 @@ export class CategoriaService {
 
     return this.http.get(`${this.apiUrl}/${categoria.codigo}`, { headers })
           .toPromise()
-          .then(response => response.json());
+          .then(response => response.json() as Categoria);
   }
 
   atualizar(categoria: Categoria): Promise<Categoria> {

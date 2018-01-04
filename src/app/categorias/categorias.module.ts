@@ -28,9 +28,6 @@ import { CategoriaCadastroComponent } from './categoria-cadastro/categoria-cadas
     CategoriaPesquisaComponent,
     CategoriaCadastroComponent
   ],
-  exports: [
-    CategoriaPesquisaComponent,
-    CategoriaCadastroComponent
-  ]
+  exports: []
 })
 export class CategoriasModule { }

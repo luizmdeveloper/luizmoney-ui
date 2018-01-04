@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -22,9 +23,11 @@ export class CategoriaCadastroComponent implements OnInit {
   constructor(private categoriaService: CategoriaService,
               private errorHandelerService: ErrorHandelerService,
               private toasty: ToastyService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Nova categoria');
     if (this.getEdicao()) {
       this.categoria.codigo = this.route.snapshot.params['codigo'];
       this.acao = 'Editar';
@@ -46,7 +49,10 @@ export class CategoriaCadastroComponent implements OnInit {
 
   carregarCategoria(categoria: Categoria) {
     this.categoriaService.buscarPorCodigo(categoria)
-      .then(resultado => this.categoria = resultado)
+      .then(resultado => {
+        this.categoria = resultado;
+        this.atualizarTitulo();
+      })
       .catch(erro => this.errorHandelerService.handele(erro));
   }
 
@@ -54,6 +60,7 @@ export class CategoriaCadastroComponent implements OnInit {
     this.categoriaService.atualizar(this.categoria).then(categoria => {
         this.categoria = categoria;
         this.toasty.success('Categoria atualizada com sucesso!');
+        this.atualizarTitulo();
       })
       .catch(erro => this.errorHandelerService.handele(erro));
   }
@@ -65,5 +72,9 @@ export class CategoriaCadastroComponent implements OnInit {
         this.categoria = new Categoria();
     })
     .catch(erro => this.errorHandelerService.handele(erro));
+  }
+
+  atualizarTitulo() {
+    this.title.setTitle(`Edição de categoria: ${this.categoria.nome}`);
   }
 }

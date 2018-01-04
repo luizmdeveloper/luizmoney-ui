@@ -32,9 +32,6 @@ import { SharedModule } from './../shared/shared.module';
     PessoaCadastroComponent,
     PessoaPesquisaComponent
   ],
-  exports: [
-    PessoaCadastroComponent,
-    PessoaPesquisaComponent
-  ]
+  exports: []
 })
 export class PessoasModule { }

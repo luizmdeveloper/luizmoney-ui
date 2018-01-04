@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -21,12 +22,25 @@ export class PessoaCadastroComponent implements OnInit {
   constructor(private errorHandelerService: ErrorHandelerService,
               private pessoaService: PessoaService,
               private toasty: ToastyService,
-              private routers: ActivatedRoute ) { }
+              private routers: ActivatedRoute,
+              private title: Title ) { }
 
   ngOnInit() {
+    this.title.setTitle('Nova pessoa');
+
     if (this.routers.snapshot.params['codigo']) {
       this.acao = 'Editar';
+      this.carregarPessoa(this.routers.snapshot.params['codigo']);
     }
+  }
+
+  carregarPessoa(codigo: number) {
+    this.pessoaService.buscarPessoa(codigo)
+    .then(pessoa => {
+      this.pessoa = pessoa;
+      this.atualizarTitulo();
+    })
+    .catch(erro => this.errorHandelerService.handele(erro));
   }
 
   salvar(form: FormControl) {
@@ -36,5 +50,9 @@ export class PessoaCadastroComponent implements OnInit {
       this.pessoa = new Pessoa();
     })
     .catch(erro => this.errorHandelerService.handele(erro));
+  }
+
+  atualizarTitulo() {
+    this.title.setTitle(`Edição pessoa: ${this.pessoa.nome}`);
   }
 }

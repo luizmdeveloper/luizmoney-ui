@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { ErrorHandelerService } from './../../core/error-handeler.service';
 import { Component, ViewChild } from '@angular/core';
 
@@ -5,12 +6,13 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/ap
 import { ToastyService } from 'ng2-toasty';
 
 import { CategoriaService, CategoriaFiltro } from './../categoria.service';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 @Component({
   selector: 'app-categoria-pesquisa',
   templateUrl: './categoria-pesquisa.component.html',
   styleUrls: ['./categoria-pesquisa.component.css']
 })
-export class CategoriaPesquisaComponent {
+export class CategoriaPesquisaComponent implements OnInit {
 
   categorias = [];
   filtro = new CategoriaFiltro();
@@ -20,7 +22,8 @@ export class CategoriaPesquisaComponent {
   constructor(private categoriaService: CategoriaService,
               private erroHandeler: ErrorHandelerService,
               private toasty: ToastyService,
-              private confirm: ConfirmationService) { }
+              private confirm: ConfirmationService,
+              private title: Title) { }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
@@ -28,6 +31,10 @@ export class CategoriaPesquisaComponent {
       this.totalRegistro = resultado.total;
       this.categorias = resultado.categorias;
     });
+  }
+
+  ngOnInit() {
+    this.title.setTitle('Pesquisa de categorias');
   }
 
   paginar(event: LazyLoadEvent) {
