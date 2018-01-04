@@ -13,6 +13,7 @@ import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.compo
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
 import { SharedModule } from './../shared/shared.module';
+import { PessoasRoutingModule } from './pessoas-routing.modules';
 
 @NgModule({
   imports: [
@@ -26,7 +27,9 @@ import { SharedModule } from './../shared/shared.module';
     InputMaskModule,
     TooltipModule,
 
-    SharedModule
+    SharedModule,
+
+    PessoasRoutingModule
   ],
   declarations: [
     PessoaCadastroComponent,

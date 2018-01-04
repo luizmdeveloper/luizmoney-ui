@@ -2,6 +2,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CategoriasRoutingModule } from './categorias-routing.modules';
 
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
@@ -11,6 +12,7 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { CategoriaPesquisaComponent } from './categoria-pesquisa/categoria-pesquisa.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoriaCadastroComponent } from './categoria-cadastro/categoria-cadastro.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,7 +24,9 @@ import { CategoriaCadastroComponent } from './categoria-cadastro/categoria-cadas
     DataTableModule,
     TooltipModule,
 
-    SharedModule
+    SharedModule,
+
+    CategoriasRoutingModule
   ],
   declarations: [
     CategoriaPesquisaComponent,

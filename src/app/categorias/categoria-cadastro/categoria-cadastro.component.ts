@@ -24,6 +24,7 @@ export class CategoriaCadastroComponent implements OnInit {
               private errorHandelerService: ErrorHandelerService,
               private toasty: ToastyService,
               private route: ActivatedRoute,
+              private router: Router,
               private title: Title) { }
 
   ngOnInit() {
@@ -39,11 +40,11 @@ export class CategoriaCadastroComponent implements OnInit {
     return this.route.snapshot.params['codigo'];
   }
 
-  salvar(form: FormControl) {
+  salvar() {
     if (this.categoria.codigo) {
       this.atualizar();
     }else {
-      this.cadastrar(form);
+      this.cadastrar();
     }
   }
 
@@ -57,21 +58,32 @@ export class CategoriaCadastroComponent implements OnInit {
   }
 
   atualizar() {
-    this.categoriaService.atualizar(this.categoria).then(categoria => {
-        this.categoria = categoria;
+    this.categoriaService.atualizar(this.categoria)
+      .then(categoriaSalva => {
+        this.categoria = categoriaSalva;
         this.toasty.success('Categoria atualizada com sucesso!');
         this.atualizarTitulo();
       })
       .catch(erro => this.errorHandelerService.handele(erro));
   }
 
-  cadastrar(form: FormControl) {
-    this.categoriaService.cadastrar(this.categoria).then(() => {
-        form.reset();
+  cadastrar() {
+    this.categoriaService.cadastrar(this.categoria)
+      .then(categoriaSalva => {
         this.toasty.success('Categoria cadastrar com sucesso!');
-        this.categoria = new Categoria();
+        this.router.navigate(['/categorias', categoriaSalva.codigo]);
     })
     .catch(erro => this.errorHandelerService.handele(erro));
+  }
+
+  novo(form: FormControl) {
+    form.reset();
+
+    setTimeout(function(){
+      this.categoria = new Categoria();
+    }.bind(this), 1);
+
+    this.router.navigate(['/categorias/nova']);
   }
 
   atualizarTitulo() {

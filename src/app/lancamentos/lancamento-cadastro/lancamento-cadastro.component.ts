@@ -74,9 +74,9 @@ export class LancamentoCadastroComponent implements OnInit  {
 
   salvar(form: FormControl) {
     if (this.getEdicao()) {
-      this.atualizar(form);
+      this.atualizar();
     } else {
-      this.cadastrar(form);
+      this.cadastrar();
     }
   }
 
@@ -89,7 +89,7 @@ export class LancamentoCadastroComponent implements OnInit  {
       .catch(erro => this.erroHandeler.handele(erro));
   }
 
-  cadastrar(form: FormControl) {
+  cadastrar() {
     this.lancamentoService.cadastrar(this.lancamento).then(lancamentoSalvo => {
       this.toasty.success('Lançamento salvo com sucesso!');
       this.router.navigate(['/lancamentos', lancamentoSalvo.codigo]);
@@ -97,7 +97,7 @@ export class LancamentoCadastroComponent implements OnInit  {
     .catch(erro => this.erroHandeler.handele(erro));
   }
 
-  atualizar(form: FormControl) {
+  atualizar() {
     this.lancamentoService.atualizar(this.lancamento)
     .then(lancamento => {
       this.lancamento = lancamento;

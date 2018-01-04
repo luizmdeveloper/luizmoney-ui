@@ -62,7 +62,7 @@
 
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
-        <a routerLink='/pessoas/nova' pButton type="button" label="Novo" class="ui-button-info"></a>
+        <button pButton type="button" label="Novo" (click)="novo(f)" class="ui-button-info"></button>
         <a routerLink="/pessoas">Voltar para a pesquisa</a>
       </div>
 

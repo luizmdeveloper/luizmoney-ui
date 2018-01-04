@@ -1,5 +1,5 @@
 <div class="container">
-  <form #f="ngForm" autocomplete="false" (ngSubmit)="salvar(f)">
+  <form #f="ngForm" autocomplete="false" (ngSubmit)="salvar()">
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>{{acao}} categoria</h1>
@@ -13,7 +13,7 @@
 
       <div class="ui-g-12">
         <button pButton type="submit" label="salvar" [disabled]="f.invalid"></button>
-        <a routerLink="/categorias/nova" pButton type="" label="Novo" class="ui-button-info"></a>
+        <button pButton type="button" label="Novo" (click)="novo(f)" class="ui-button-info"></button>
         <a routerLink="/categorias">Voltar para a pesquisa</a>
       </div>
     </div>

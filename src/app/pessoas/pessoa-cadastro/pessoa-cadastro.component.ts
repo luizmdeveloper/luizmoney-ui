@@ -1,7 +1,7 @@
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ErrorHandelerService } from './../../core/error-handeler.service';
 import { PessoaService } from '../pessoa.service';
@@ -23,15 +23,20 @@ export class PessoaCadastroComponent implements OnInit {
               private pessoaService: PessoaService,
               private toasty: ToastyService,
               private routers: ActivatedRoute,
+              private router: Router,
               private title: Title ) { }
 
   ngOnInit() {
     this.title.setTitle('Nova pessoa');
 
-    if (this.routers.snapshot.params['codigo']) {
+    if (this.getEditando()) {
       this.acao = 'Editar';
       this.carregarPessoa(this.routers.snapshot.params['codigo']);
     }
+  }
+
+  getEditando(): Boolean {
+    return this.routers.snapshot.params['codigo'];
   }
 
   carregarPessoa(codigo: number) {
@@ -44,15 +49,43 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
-    this.pessoaService.cadastrar(this.pessoa).then(() => {
-      form.reset();
-      this.toasty.success('Pessoa cadastrada com sucesso!');
-      this.pessoa = new Pessoa();
+    if (this.getEditando()) {
+      this.atualizar(form);
+    } else {
+      this.cadastar(form);
+    }
+  }
+
+  cadastar(form: FormControl) {
+    this.pessoaService.cadastrar(this.pessoa)
+    .then(pessoaSalva => {
+      this.router.navigate([`/pessoas`, pessoaSalva.codigo]);
     })
     .catch(erro => this.errorHandelerService.handele(erro));
+  }
+
+  atualizar(form: FormControl) {
+    this.pessoaService.cadastrar(this.pessoa)
+    .then(pessoaSalva => {
+      this.pessoa = pessoaSalva;
+      this.toasty.success('Pessoa alterado com sucesso!');
+      this.atualizarTitulo();
+    })
+    .catch(erro => this.errorHandelerService.handele(erro));
+  }
+
+  novo(form: FormControl) {
+    form.reset();
+
+    setTimeout(function() {
+      this.pessoa = new Pessoa();
+    }.bind(this), 1);
+
+    this.router.navigate(['/pessoas/novo']);
   }
 
   atualizarTitulo() {
     this.title.setTitle(`Edição pessoa: ${this.pessoa.nome}`);
   }
+
 }

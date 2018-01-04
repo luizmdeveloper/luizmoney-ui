@@ -11,6 +11,7 @@ import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton
 import { CalendarModule } from 'primeng/components/calendar/calendar';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DataTableModule } from 'primeng/components/datatable/datatable';
+import { LancamentosRoutingModule } from './lancamentos-routing.modules';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 
@@ -36,7 +37,9 @@ import { SharedModule } from './../shared/shared.module';
 
     SharedModule,
 
-    CurrencyMaskModule
+    CurrencyMaskModule,
+
+    LancamentosRoutingModule
   ],
   declarations: [
     LancamentoCadastroComponent,
