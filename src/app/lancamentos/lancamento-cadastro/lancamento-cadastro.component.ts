@@ -72,7 +72,7 @@ export class LancamentoCadastroComponent implements OnInit  {
       .catch(error => this.erroHandeler.handele(error));
   }
 
-  salvar(form: FormControl) {
+  salvar() {
     if (this.getEdicao()) {
       this.atualizar();
     } else {

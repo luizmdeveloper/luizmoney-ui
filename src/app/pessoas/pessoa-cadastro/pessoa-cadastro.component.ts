@@ -48,15 +48,15 @@ export class PessoaCadastroComponent implements OnInit {
     .catch(erro => this.errorHandelerService.handele(erro));
   }
 
-  salvar(form: FormControl) {
+  salvar() {
     if (this.getEditando()) {
-      this.atualizar(form);
+      this.atualizar();
     } else {
-      this.cadastar(form);
+      this.cadastar();
     }
   }
 
-  cadastar(form: FormControl) {
+  cadastar() {
     this.pessoaService.cadastrar(this.pessoa)
     .then(pessoaSalva => {
       this.router.navigate([`/pessoas`, pessoaSalva.codigo]);
@@ -64,7 +64,7 @@ export class PessoaCadastroComponent implements OnInit {
     .catch(erro => this.errorHandelerService.handele(erro));
   }
 
-  atualizar(form: FormControl) {
+  atualizar() {
     this.pessoaService.cadastrar(this.pessoa)
     .then(pessoaSalva => {
       this.pessoa = pessoaSalva;
@@ -87,5 +87,4 @@ export class PessoaCadastroComponent implements OnInit {
   atualizarTitulo() {
     this.title.setTitle(`Edição pessoa: ${this.pessoa.nome}`);
   }
-
 }
