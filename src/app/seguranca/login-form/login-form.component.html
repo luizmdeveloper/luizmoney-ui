@@ -1,0 +1,22 @@
+<div class="container">
+  {{ oauth.payLoad | json }}
+  <div class="container-login">
+    <div class="ui-g  ui-fluid">
+      <form #f="ngForm" autocomplete="false">
+        <div class="ui-g-12">
+          <h1>Login</h1>
+        </div>
+        <div class="ui-g-12">
+          <input pInputText type="text" name="email" ngModel #email required placeholder="email">
+        </div>
+        <div class="ui-g-12">
+          <input pInputText type="password" name="senha" ngModel #senha required placeholder="senha">
+        </div>
+        <div class="ui-g-12">
+          <button pButton type="submit" (click)="login(email.value, senha.value)" [disabled]="!f.valid" label="entrar"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

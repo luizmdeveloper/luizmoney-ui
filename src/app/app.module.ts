@@ -12,6 +12,7 @@ import { CategoriasModule } from './categorias/categorias.module';
 import { CoreModule } from './core/core.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { PessoasModule } from './pessoas/pessoas.module';
+import { SegurancaModule } from './seguranca/seguranca.module';
 
 import { ToastyModule, providers } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
@@ -30,6 +31,7 @@ import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdia
     PessoasModule,
     CoreModule,
     CategoriasModule,
+    SegurancaModule,
     AppRoutingModule
   ],
   providers: [],

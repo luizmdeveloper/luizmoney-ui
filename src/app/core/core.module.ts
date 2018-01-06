@@ -14,6 +14,8 @@ import { PessoaService } from './../pessoas/pessoa.service';
 import { ErrorHandelerService } from './error-handeler.service';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { OauthService } from './../seguranca/oauth.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @NgModule({
   imports: [
@@ -39,6 +41,10 @@ import { Title } from '@angular/platform-browser';
     PessoaService,
     ConfirmationService,
     Title,
+    OauthService,
+
+    JwtHelper,
+
     { provide: LOCALE_ID, useValue: 'pt-BR'},
     CategoriaService
   ]
