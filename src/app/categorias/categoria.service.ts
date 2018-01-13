@@ -1,3 +1,5 @@
+import { AuthHttp } from 'angular2-jwt';
+
 import { Categoria } from './../core/model';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 import { Injectable } from '@angular/core';
@@ -18,12 +20,11 @@ export class CategoriaService {
 
   apiUrl = 'http://localhost:8080/categorias';
 
-  constructor(private http: Http,
+  constructor(private http: AuthHttp,
               private toasty: ToastyService,
               private erroHandeler: ErrorHandelerService) { }
 
   pesquisar(filtro: CategoriaFiltro): Promise<any> {
-    const headers = new Headers();
     const params = new URLSearchParams();
 
     params.set('page', filtro.pagina.toString());
@@ -33,9 +34,7 @@ export class CategoriaService {
       params.set('nome', filtro.nome);
     }
 
-    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
-
-    return this.http.get(`${this.apiUrl}`, { headers, search : params })
+    return this.http.get(`${this.apiUrl}`, { search : params })
       .toPromise()
       .then(response => {
           const categorias = response.json().content;
@@ -50,48 +49,31 @@ export class CategoriaService {
   }
 
   buscar(): Promise<any> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
-
-    return this.http.get(`${this.apiUrl}`, { headers })
+    return this.http.get(`${this.apiUrl}`)
       .toPromise()
       .then(response => response.json().content);
   }
 
   excluir(codigo: any): Promise<void> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
-
-    return this.http.delete(`${this.apiUrl}/${codigo}`, { headers })
+    return this.http.delete(`${this.apiUrl}/${codigo}`)
         .toPromise()
         .then(() => null);
   }
 
   cadastrar(categoria: Categoria): Promise<Categoria> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.post(`${this.apiUrl}`, JSON.stringify(categoria), { headers })
+    return this.http.post(`${this.apiUrl}`, JSON.stringify(categoria))
             .toPromise()
             .then(response => response.json());
   }
 
   buscarPorCodigo(categoria: Categoria): Promise<Categoria> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
-
-    return this.http.get(`${this.apiUrl}/${categoria.codigo}`, { headers })
+    return this.http.get(`${this.apiUrl}/${categoria.codigo}`)
           .toPromise()
           .then(response => response.json() as Categoria);
   }
 
   atualizar(categoria: Categoria): Promise<Categoria> {
-    const headers = new Headers();
-    headers.append('Authorization', 'Basic YWRtaW5pc3RyYWRvckBsdWl6bW9uZXkuY29tLmJyOmFkbWlu');
-    headers.append('Content-Type', 'application/json');
-
-    return this.http.put(`${this.apiUrl}/${categoria.codigo}`, JSON.stringify(categoria), { headers })
+    return this.http.put(`${this.apiUrl}/${categoria.codigo}`, JSON.stringify(categoria))
           .toPromise()
           .then(response => {
             const categoriaAlterada = response.json() as Categoria;

@@ -1,6 +1,9 @@
-import { OauthService } from './../oauth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+
+import { OauthService } from './../oauth.service';
+import { ErrorHandelerService } from './../../core/error-handeler.service';
 
 @Component({
   selector: 'app-login-form',
@@ -11,7 +14,9 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private title: Title,
-    private oauth: OauthService
+    private oauth: OauthService,
+    private errorHandeler: ErrorHandelerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -19,7 +24,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   login(usuario: string, senha: string) {
-    this.oauth.login(usuario, senha);
+    this.oauth.login(usuario, senha)
+      .then(() => {
+        this.router.navigate(['/categorias']);
+      })
+      .catch(erro => this.errorHandeler.handele(erro));
   }
 
 }
