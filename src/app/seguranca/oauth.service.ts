@@ -25,7 +25,7 @@ export class OauthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post(this.oathUrl, body, { headers })
+    return this.http.post(this.oathUrl, body, { headers, withCredentials: true })
             .toPromise()
             .then(response => {
               this.armazenarToken(response.json().access_token);
@@ -41,6 +41,30 @@ export class OauthService {
 
               return Promise.reject(responseJson);
             });
+  }
+
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
+
+  obterNovoAccessToken(): Promise<void> {
+    const headers =  new Headers();
+    const body = 'grant_type=refresh_token';
+
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+    return this.http.post(this.oathUrl, body, { headers, withCredentials: true })
+    .toPromise()
+    .then(response => {
+      this.armazenarToken(response.json().access_token);
+      return Promise.resolve(null);
+    })
+    .catch(erro => {
+      return Promise.resolve(null);
+    });
   }
 
   temPermissao(permissao: string) {

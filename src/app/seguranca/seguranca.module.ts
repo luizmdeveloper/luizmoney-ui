@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
 import { providers } from 'ng2-toasty';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { MoneyHttp } from './money-http';
 
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
@@ -11,13 +13,14 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { LoginFormComponent } from './login-form/login-form.component';
 
 import { SegurancaRoutingModule } from './seguranca-routing.modules';
+import { OauthService } from './oauth.service';
 
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+export function authHttpServiceFactory(auth: OauthService, http: Http, options: RequestOptions) {
   const httpConfig = new AuthConfig({
     globalHeaders: [{'content-Type' : 'application/json'}]
   });
 
-  return new AuthHttp(httpConfig, http, options);
+  return new MoneyHttp(auth, httpConfig, http, options);
 }
 
 
@@ -38,7 +41,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions ]
+      deps: [OauthService, Http, RequestOptions ]
     }
   ]
 })
