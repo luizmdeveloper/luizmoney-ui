@@ -27,7 +27,7 @@
           <p-column styleClass="col-acoes">
             <ng-template let-cat="rowData" pTemplate="body">
               <a pButton [routerLink]="['/categorias', cat.codigo ]" icon="fa fa-pencil" pTooltip="Editar" tooltipPosition="top"></a>
-              <button pButton icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
+              <button pButton [disabled]="auth.temPermissao('ROLE_REMOVER_CATEGORIA')"  icon="fa fa-trash" pTooltip="Excluir" tooltipPosition="top"
                     (click)="confirmacaoExcluir(cat)"></button>
             </ng-template>
           </p-column>

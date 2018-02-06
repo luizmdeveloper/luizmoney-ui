@@ -1,3 +1,4 @@
+import { AuthGuard } from './../seguranca/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -5,9 +6,24 @@ import { CategoriaCadastroComponent } from './categoria-cadastro/categoria-cadas
 import { CategoriaPesquisaComponent } from './categoria-pesquisa/categoria-pesquisa.component';
 
 const routes: Routes = [
-  { path: 'categorias', component: CategoriaPesquisaComponent },
-  { path: 'categorias/nova', component: CategoriaCadastroComponent },
-  { path: 'categorias/:codigo', component: CategoriaCadastroComponent },
+  {
+    path: 'categorias',
+    component: CategoriaPesquisaComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_PESQUISAR_CATEGORIA'] }
+  },
+  {
+    path: 'categorias/nova',
+    component: CategoriaCadastroComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_CADASTRAR_CATEGORIA'] }
+  },
+  {
+    path: 'categorias/:codigo',
+    component: CategoriaCadastroComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ROLE_CADASTRAR_CATEGORIA'] }
+  },
 ];
 
 @NgModule({

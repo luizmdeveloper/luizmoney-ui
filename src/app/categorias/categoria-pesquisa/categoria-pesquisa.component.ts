@@ -7,6 +7,8 @@ import { ToastyService } from 'ng2-toasty';
 
 import { CategoriaService, CategoriaFiltro } from './../categoria.service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { OauthService } from '../../seguranca/oauth.service';
+
 @Component({
   selector: 'app-categoria-pesquisa',
   templateUrl: './categoria-pesquisa.component.html',
@@ -19,11 +21,14 @@ export class CategoriaPesquisaComponent implements OnInit {
   totalRegistro = 0;
   @ViewChild('tabela') grid;
 
-  constructor(private categoriaService: CategoriaService,
-              private erroHandeler: ErrorHandelerService,
-              private toasty: ToastyService,
-              private confirm: ConfirmationService,
-              private title: Title) { }
+  constructor(
+    private categoriaService: CategoriaService,
+    private erroHandeler: ErrorHandelerService,
+    private toasty: ToastyService,
+    private confirm: ConfirmationService,
+    private title: Title,
+    private auth: OauthService
+  ) { }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;

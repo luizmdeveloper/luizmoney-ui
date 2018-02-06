@@ -6,6 +6,8 @@ import { OauthService } from './oauth.service';
 
 import { Observable } from 'rxjs/Observable';
 
+export class NotAuthenticated {}
+
 @Injectable()
 export class MoneyHttp extends AuthHttp {
 
@@ -53,6 +55,9 @@ export class MoneyHttp extends AuthHttp {
       const chamadaNovoAccessToken = this.auth.obterNovoAccessToken()
         .then(() => {
           console.log('Criando o novo access token');
+          if (this.auth.isAccessTokenInvalido()) {
+            throw new NotAuthenticated();
+          }
           return fn().toPromise();
         });
 

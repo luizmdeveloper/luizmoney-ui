@@ -13,7 +13,9 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { LoginFormComponent } from './login-form/login-form.component';
 
 import { SegurancaRoutingModule } from './seguranca-routing.modules';
+
 import { OauthService } from './oauth.service';
+import { AuthGuard } from './auth.guard';
 
 export function authHttpServiceFactory(auth: OauthService, http: Http, options: RequestOptions) {
   const httpConfig = new AuthConfig({
@@ -42,7 +44,8 @@ export function authHttpServiceFactory(auth: OauthService, http: Http, options: 
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [OauthService, Http, RequestOptions ]
-    }
+    },
+    AuthGuard
   ]
 })
 export class SegurancaModule { }

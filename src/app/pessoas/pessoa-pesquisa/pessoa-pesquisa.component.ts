@@ -8,6 +8,7 @@ import { PessoaService } from '../pessoa.service';
 import { ConfirmationService } from 'primeng/components/common/api';
 import { ErrorHandelerService } from './../../core/error-handeler.service';
 import { ToastyService } from 'ng2-toasty';
+import { OauthService } from '../../seguranca/oauth.service';
 
 @Component({
   selector: 'app-pessoa-pesquisa',
@@ -26,7 +27,8 @@ export class PessoaPesquisaComponent implements OnInit  {
     private toasty: ToastyService,
     private errorHandeler: ErrorHandelerService,
     private confirmation: ConfirmationService,
-    private title: Title
+    private title: Title,
+    private auth: OauthService
   ) {}
 
   ngOnInit() {
