@@ -1,3 +1,5 @@
+import { ErrorHandelerService } from './../error-handeler.service';
+import { LogoutService } from './../../seguranca/logout.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { OauthService } from '../../seguranca/oauth.service';
@@ -9,8 +11,21 @@ import { OauthService } from '../../seguranca/oauth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth: OauthService) { }
+  constructor(
+    private auth: OauthService,
+    private logoutService: LogoutService,
+    private router: Router,
+    private errorHandeler: ErrorHandelerService
+  ) { }
 
   ngOnInit() {}
+
+  logout() {
+    this.logoutService.logout()
+    .then(() => {
+      this.router.navigate(['/login']);
+    })
+    .catch(erro => this.errorHandeler.handele(erro));
+  }
 
 }

@@ -43,6 +43,11 @@ export class OauthService {
             });
   }
 
+  removerAccessToken() {
+    this.jwtHelper = null;
+    localStorage.removeItem('token');
+  }
+
   isAccessTokenInvalido() {
     const token = localStorage.getItem('token');
 
