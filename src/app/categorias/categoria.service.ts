@@ -8,6 +8,7 @@ import { ErrorHandelerService } from './../core/error-handeler.service';
 import { ToastyService } from 'ng2-toasty';
 
 import 'rxjs/add/operator/toPromise';
+import { environment } from './../../environments/environment';
 
 export class CategoriaFiltro {
   nome: string;
@@ -18,11 +19,13 @@ export class CategoriaFiltro {
 @Injectable()
 export class CategoriaService {
 
-  apiUrl = 'http://localhost:8080/categorias';
+  apiUrl: string;
 
   constructor(private http: AuthHttp,
               private toasty: ToastyService,
-              private erroHandeler: ErrorHandelerService) { }
+              private erroHandeler: ErrorHandelerService) {
+    this.apiUrl = `${environment.apiUrl}/categorias`;
+  }
 
   pesquisar(filtro: CategoriaFiltro): Promise<any> {
     const params = new URLSearchParams();

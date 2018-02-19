@@ -4,11 +4,12 @@ import { Injectable } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
 
 import 'rxjs/add/operator/toPromise';
+import { environment } from './../../environments/environment';
 
 @Injectable()
 export class OauthService {
 
-  oathUrl = 'http://localhost:8080/oauth/token';
+  oathUrl: string;
   payLoad;
 
   constructor(
@@ -16,6 +17,7 @@ export class OauthService {
     private jwtHelper: JwtHelper,
   ) {
     this.carregarToken();
+    this.oathUrl = `${environment.apiUrl}/oauth/token`;
   }
 
   login(usuario: string, senha: string): Promise<void> {

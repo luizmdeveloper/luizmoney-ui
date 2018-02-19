@@ -7,6 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandelerService } from '../core/error-handeler.service';
 import { Pessoa } from '../core/model';
+import { environment } from '../../environments/environment';
 
 export class PessoaFiltro {
   nome: String;
@@ -17,11 +18,13 @@ export class PessoaFiltro {
 @Injectable()
 export class PessoaService {
 
-  urlPessoa = 'http://localhost:8080/pessoas';
+  urlPessoa: string;
 
   constructor(private http: AuthHttp,
               private toasty: ToastyService,
-              private errorHandeler: ErrorHandelerService) {}
+              private errorHandeler: ErrorHandelerService) {
+    this.urlPessoa = `${environment.apiUrl}/pessoas`;
+  }
 
   pesquisar(filtro): Promise<any> {
     const params = new URLSearchParams();
